@@ -1,4 +1,10 @@
+[![Build Status](https://travis-ci.com/emarcora/sales-taxes.svg?token=6rwXoqptqEcQdjSWs8uk&branch=master)](https://travis-ci.com/emarcora/sales-taxes)
+
 # Sales Taxes
+
+Spring boot application that exposes a REST API endpoint to compute sales taxes. 
+
+### Proposed solution
 
 ### Problem description
 
