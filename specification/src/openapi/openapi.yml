@@ -1,0 +1,164 @@
+openapi: 3.0.0
+info:
+  title: Sales Taxes Calculator API
+  description: Apply taxes to shopping items
+  version: 1.0.0
+paths:
+  /about:
+    get:
+      summary: About info
+      description: About info
+      operationId: about
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AboutInfo'
+      deprecated: false
+  /applyTaxes:
+    post:
+      summary: Apply taxes to items
+      description: Apply taxes to items
+      operationId: applyTaxes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaxesRequest'
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaxesResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    ApiError:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        transient:
+          type: boolean
+      title: ApiError
+      description: representation of an error message
+    AboutInfo:
+      title: About info
+      type: object
+      properties:
+        api_versions:
+          type: array
+          items:
+            type: string
+          example:
+            - 1
+        version:
+          type: string
+        component:
+          type: string
+        product:
+          type: string
+    Item:
+      title: Item
+      type: object
+      required:
+        - type
+        - name
+        - quantity
+        - price
+        - imported
+      properties:
+        type:
+          type: string
+          enum:
+            - BOOK
+            - FOOD
+            - MEDICAL
+            - OTHER
+          example: OTHER
+        name:
+          type: string
+          example: bottle of perfume
+        quantity:
+          type: integer
+          example: 1
+        price:
+          type: number
+          example: 20.2
+        imported:
+          type: boolean
+          example: false
+    TaxesRequest:
+      title: Taxes request
+      type: object
+      required:
+        - items
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'
+    TaxesResponse:
+      title: Taxes response
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'
+        sales_taxes:
+          type: number
+          example: 2
+        total_amount:
+          type: number
+          example: 20.2
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    TooManyRequest:
+      description: Too Many Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
