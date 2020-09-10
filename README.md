@@ -5,7 +5,7 @@
 ### Proposed solution
 
 Spring boot application that exposes a REST API endpoint to compute sales taxes. It accepts a list of Item in a JSON format and produces a JSON as output with taxes computed.
-Please refer to openapi.yaml for further details.
+Please refer to openapi.yml for further details.
 
 ### Problem description
 
