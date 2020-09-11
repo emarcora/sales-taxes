@@ -4,8 +4,9 @@
 
 ### Proposed solution
 
-Spring boot application that exposes a REST API endpoint to compute sales taxes. It accepts a list of Item in a JSON format and produces a JSON as output with taxes computed.
-Please refer to openapi.yml for further details.
+Spring Boot application that exposes a REST API endpoint to compute sales taxes. 
+It accepts a list of Item in JSON format and produces a JSON as output with taxes computed.
+Please refer to https://emarcora.github.io/sales-taxes/ for a detailed API description.
 
 ### Problem description
 
